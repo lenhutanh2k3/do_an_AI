@@ -1,15 +1,17 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const OrderShema = new mongoose.Schema({
+const OrderSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    products: [
-        {
-            product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
-            quantity: { type: Number, required: true, min: 1 },
-            // Lưu lại giá tại thời điểm đặt hàng (tránh thay đổi khi giá sản phẩm thay đổi sau này)
-            price: { type: Number, required: true, min: 0 },
-        },
-    ],
+    products: {
+        type: [
+            {
+                product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+                quantity: { type: Number, required: true, min: 1 },
+                price: { type: Number, required: true, min: 0 },
+            },
+        ],
+        validate: [arrayLimit, 'Đơn hàng phải có ít nhất một sản phẩm'],
+    },
     totalAmount: { type: Number, required: true, min: 0 },
     status: {
         type: String,
@@ -17,7 +19,12 @@ const OrderShema = new mongoose.Schema({
         default: 'Pending',
     },
     shippingAddress: { type: String, required: true },
-    discount: { type: Schema.Types.ObjectId, ref: 'Discount' },
-},
-    { timestamps: true }
-)
+    discount: { type: mongoose.Schema.Types.ObjectId, ref: 'Discount' },
+}, { timestamps: true });
+
+function arrayLimit(val) {
+    return val.length > 0;
+}
+
+const Order = mongoose.model('Order', OrderSchema);
+export default Order;

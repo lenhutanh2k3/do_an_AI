@@ -1,61 +1,61 @@
 import Category from '../models/category_model.js';
 import response from '../utils/response.js';
+
 const CategoryController = {
     getAllCategory: async (req, res) => {
         try {
             const data = await Category.find();
             if (!data || data.length === 0) {
-                response(res, 401, "Not found");
+                return response(res, 404, "Không tìm thấy danh mục");
             }
-            response(res, 201,"",data)
+            response(res, 200, "", data);
         } catch (error) {
             console.error(error);
-            response(res, 500);
+            response(res, 500, "Lỗi máy chủ nội bộ");
         }
     },
     createCategory: async (req, res) => {
         try {
             const { name, description } = req.body;
-            console.log(req.body);
-            const category = new Category({
-                name,
-                description
-            })
+            const existingCategory = await Category.findOne({ name });
+            if (existingCategory) {
+                return response(res, 400, "Danh mục đã tồn tại");
+            }
+            const category = new Category({ name, description });
             await category.save();
-            response(res, 201, " Create successfully category", category)
-
+            response(res, 201, "Tạo danh mục thành công", category);
         } catch (error) {
-            console.log(error)
-            response(res, 500);
+            console.log(error);
+            response(res, 500, "Lỗi máy chủ nội bộ");
         }
     },
     deleteCategory: async (req, res) => {
         try {
-
             const id = req.params.id;
             const result = await Category.findByIdAndDelete(id);
-            console.log(result);
-            if (!result) response(res, 401, "Not found");
-            response(res, 201, "Delete successflly");
-
+            if (!result) {
+                return response(res, 404, "Danh mục không tồn tại");
+            }
+            response(res, 200, "Xóa danh mục thành công");
         } catch (error) {
-            console.log(error)
-            response(res, 500);
+            console.log(error);
+            response(res, 500, "Lỗi máy chủ nội bộ");
         }
     },
     updateCategory: async (req, res) => {
         try {
-
             const { id } = req.params;
             const data = req.body;
-            console.log(data);
             const categoryUpdate = await Category.findByIdAndUpdate(id, data, { new: true });
-            if (!categoryUpdate) response(res, 401, "No successfully");
-            response(res, 201, "Update successfully", categoryUpdate)
+            if (!categoryUpdate) {
+                return response(res, 404, "Danh mục không tồn tại");
+            }
+            response(res, 200, "Cập nhật danh mục thành công", categoryUpdate);
         } catch (error) {
             console.log(error);
-            response(res, 500);
+            response(res, 500, "Lỗi máy chủ nội bộ");
         }
     }
 };
+
 export default CategoryController;

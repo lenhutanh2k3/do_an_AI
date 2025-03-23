@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const DiscountShema = new mongoose({
+const DiscountShema = new mongoose.Schema({
     code: {
         type: String,
         required: true,
@@ -14,8 +14,8 @@ const DiscountShema = new mongoose({
     validFrom: { type: Date, required: true },
     validUntil: { type: Date, required: true },
     // Tùy chọn: Áp dụng giảm giá cho các sản phẩm hoặc danh mục cụ thể
-    applicableProducts: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
-    applicableCategories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
+    applicableProducts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+    applicableCategories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
 },
     { timestamps: true }
 )

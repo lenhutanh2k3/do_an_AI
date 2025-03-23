@@ -1,0 +1,21 @@
+POST http://localhost:5000/api/category
+Content-Type: application/json
+
+ {
+        "name": "",
+        "description": ""
+    }
+###
+GET http://localhost:5000/api/category
+
+### 
+DELETE http://localhost:5000/api/category/67dd25e8e8658788204f3735
+
+###
+    
+PUT http://localhost:5000/api/category/67dd5488f11922ce575ccb19
+Content-Type: application/json
+
+{
+    "description":"Giày sandals thoáng mát, phù hợp cho mùa hè"
+}

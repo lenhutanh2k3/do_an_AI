@@ -1,6 +1,5 @@
-import mongoose  from "mongoose";
+import mongoose from 'mongoose';
 
-// Định nghĩa schema cho sản phẩm giày
 const productSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true },
     description: { type: String, required: true, trim: true },
@@ -29,14 +28,17 @@ const productSchema = new mongoose.Schema({
         enum: ['In Stock', 'Out of Stock', 'Pre-order'],
         default: 'In Stock',
     },
-    // Liên kết tới model Discount nếu sản phẩm có giảm giá áp dụng
     discount: { type: mongoose.Schema.Types.ObjectId, ref: 'Discount' },
-    
 }, { timestamps: true });
 
-// Hàm validate để đảm bảo rằng mảng không rỗng
 function arrayLimit(val) {
     return val.length > 0;
 }
+
+productSchema.pre('save', function (next) {
+    this.status = this.stockQuantity > 0 ? 'In Stock' : 'Out of Stock';
+    next();
+});
+
 const Product = mongoose.model('Product', productSchema);
 export default Product;

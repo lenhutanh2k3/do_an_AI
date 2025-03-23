@@ -1,31 +1,65 @@
 import jwt from 'jsonwebtoken';
 import response from '../utils/response.js';
 
-// Middleware: Xác thực token
-export const verifyToken = (req, res, next) => {
-    const token = req.cookies.access_token;  // Lấy token từ cookie
 
+
+export const verifyToken = (req, res, next) => {
+    console.log('Cookies received:', req.cookies); // Debug
+    const token = req.cookies.access_token;
+    console.log('Token from cookie:', token);
     if (!token) {
-        response(res,401,"You are not authenticated");
-        
+        return res.status(401).json({ message: 'Không tìm thấy token trong cookie' });
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) {
-            response(res,403,"Token is not valid");
-        }
-        req.user = user;  // Gán thông tin người dùng vào request
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        req.user = decoded;
         next();
-    });
+    } catch (error) {
+        return res.status(403).json({ message: 'Token không hợp lệ' });
+    }
 };
 
-// Middleware: Xác thực người dùng (đảm bảo chỉ chính người dùng hoặc admin mới có thể thực hiện hành động)
+// Middleware: Xác thực người dùng
 export const verifyUser = (req, res, next) => {
     verifyToken(req, res, () => {
         if (req.user.id === req.params.id || req.user.role === 'admin') {
-            next(); 
+            next();
         } else {
-            response(res,403,"You are not allowed to do this");          
+            response(res, 403, "Bạn không có quyền thực hiện hành động này");
+        }
+    });
+};
+
+// Middleware: Xác thực admin
+export const verifyAdmin = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if (req.user.role === 'admin') {
+            next();
+        } else {
+            response(res, 403, "Bạn không có quyền thực hiện hành động này");
+        }
+    });
+};
+
+// Middleware: Xác thực cập nhật người dùng
+export const verifyUpdateUser = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if (req.user.role === 'admin' || req.user.id === req.params.id) {
+            next();
+        } else {
+            response(res, 403, "Bạn không có quyền cập nhật người dùng này");
+        }
+    });
+};
+
+// Middleware: Xác thực customer hoặc admin
+export const verifyCustomerOrAdmin = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if (req.user.role === 'admin' || req.user.role === 'customer') {
+            next();
+        } else {
+            response(res, 403, "Bạn không có quyền thực hiện hành động này");
         }
     });
 };

@@ -1,0 +1,29 @@
+###
+GET http://localhost:5000/api/product
+
+###
+POST http://localhost:5000/api/product
+Content-Type: application/json
+
+{
+    "name": "Hoka One One",
+    "description": "Giày chạy bộ thoải mái cho các quãng đường dài",
+    "price": 140,
+    "category": "67dd5478f11922ce575ccb17",
+    "sizes": [41, 42, 43],
+    "colors": ["Xanh", "Trắng"],
+    "images": ["/images/hoka-one-one-1.jpg", "/images/hoka-one-one-2.jpg"],
+    "brand": "Hoka",
+    "material": "Mesh",
+    "stockQuantity": 25,
+    "status": "In Stock",
+    "discount":"67de8226ff49a95d528345f3"
+  }
+###
+
+PUT http://localhost:5000/api/product/67de80b0ff49a95d528345df
+Content-Type: application/json
+
+{
+    "discount":"67de816dff49a95d528345f0"
+}

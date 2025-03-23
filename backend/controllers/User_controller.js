@@ -31,13 +31,17 @@ const UserController = {
     createUser: async (req, res) => {
         try {
             const { username, email, password } = req.body;
+            const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+            if (existingUser) {
+                if (existingUser.email === email) return response(res, 400, "Email đã được sử dụng");
+                if (existingUser.username === username) return response(res, 400, "Tên người dùng đã được sử dụng");
+            }
             const newUser = new User({ username, email, password });
-
             await newUser.save();
-            response(res, 201, "User created successfully", newUser);
+            response(res, 201, "Người dùng đã được tạo thành công", newUser);
         } catch (error) {
             console.error(error);
-            response(res, 500, "Internal Server Error");
+            response(res, 500, "Lỗi máy chủ nội bộ");
         }
     },
 
@@ -46,16 +50,18 @@ const UserController = {
         try {
             const { id } = req.params;
             const data = req.body;
-
-            const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
+            if (req.user.role !== 'admin' && req.user.id !== id) {
+                return response(res, 403, "Bạn không có quyền cập nhật người dùng này");
+            }
+            const updatedUser = await User.findByIdAndUpdate(id, data, { new: true }).select('-password -refreshToken');
             if (!updatedUser) {
-                response(res, 404, "User not found");
+                response(res, 404, "Người dùng không tồn tại");
             } else {
-                response(res, 200, "User updated successfully", updatedUser);
+                response(res, 200, "Người dùng đã được cập nhật thành công", updatedUser);
             }
         } catch (error) {
             console.error(error);
-            response(res, 500, "Internal Server Error");
+            response(res, 500, "Lỗi máy chủ nội bộ");
         }
     },
 
