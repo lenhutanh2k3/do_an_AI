@@ -19,6 +19,11 @@ const OrderSchema = new mongoose.Schema({
         default: 'Pending',
     },
     shippingAddress: { type: String, required: true },
+    paymentMethod: {
+        type: String,
+        enum: ['COD','MOMO', 'BANK'],
+        required: true
+    },
     discount: { type: mongoose.Schema.Types.ObjectId, ref: 'Discount' },
 }, { timestamps: true });
 

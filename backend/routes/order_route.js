@@ -4,10 +4,14 @@ import express from 'express';
 
 const RouterOrder = express.Router();
 
-RouterOrder.get('/',  Order_controller.getAllOrders);
-RouterOrder.post('/',  Order_controller.createOrder);
-RouterOrder.put('/:id',  Order_controller.updateOrderStatus);
-RouterOrder.delete('/:id', Order_controller.deleteOrder);
-RouterOrder.get('/:id',  Order_controller.getOrderById);
+// Routes cần xác thực customer hoặc admin
+RouterOrder.post('/', verifyCustomerOrAdmin, Order_controller.createOrder);
+RouterOrder.get('/:id', verifyCustomerOrAdmin, Order_controller.getOrderById);
+
+// Routes chỉ dành cho admin
+RouterOrder.get('/', verifyAdmin, Order_controller.getAllOrders);
+RouterOrder.put('/:id', verifyAdmin, Order_controller.updateOrderStatus);
+RouterOrder.delete('/:id', verifyAdmin, Order_controller.deleteOrder);
+RouterOrder.get('/count', verifyAdmin, Order_controller.countOrder);
 
 export default RouterOrder;

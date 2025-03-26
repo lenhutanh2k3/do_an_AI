@@ -1,0 +1,23 @@
+GET http://localhost:5000/api/discount
+
+### 
+POST http://localhost:5000/api/discount
+Content-Type: application/json
+
+{
+        "code": "BACKTOSCHOOL15",
+        "description": "Giảm giá 15% cho giày học sinh",
+        "discountType": "percentage",
+        "amount": 15,
+        "validFrom": "2025-08-01T00:00:00.000Z",
+        "validUntil": "2025-09-30T23:59:59.000Z",
+        "applicableProducts": [],
+        "applicableCategories": [
+           
+        ],
+        "minimumPurchase": 300000,
+        "maximumDiscount": 50000,
+        "usageLimit": 300,
+        "usedCount": 0,
+        "isActive": true
+    }

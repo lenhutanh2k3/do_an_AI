@@ -80,6 +80,29 @@ const UserController = {
             console.error(error);
             response(res, 500, "Internal Server Error");
         }
+    },
+    countUser:async(req,res)=>
+    {
+    
+            try {
+                // Đếm số lượng Category trong cơ sở dữ liệu
+                const UserCount = await User.countDocuments();
+
+                // Trả về kết quả
+                res.status(200).json({
+                    success: true,
+                    count: UserCount,
+                    message: 'Số lượng user được tính thành công!'
+                });
+            } catch (error) {
+                // Xử lý lỗi
+                console.error(error);
+                res.status(500).json({
+                    success: false,
+                    message: 'Có lỗi xảy ra khi tính user'
+                });
+            }
+        
     }
 };
 

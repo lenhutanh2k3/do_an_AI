@@ -6,6 +6,7 @@ import { verifyToken, verifyAdmin } from '../middleware/verify.js';
 const RouterCategory = express.Router();
 
 RouterCategory.get('/', CategoryController.getAllCategory);
+RouterCategory.get('/count', CategoryController.countCategory)
 RouterCategory.post('/',  validateCategory, CategoryController.createCategory);
 RouterCategory.delete('/:id', CategoryController.deleteCategory);
 RouterCategory.put('/:id',  validateCategory, CategoryController.updateCategory);

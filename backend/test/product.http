@@ -1,16 +1,17 @@
 ###
-GET http://localhost:5000/api/product
+GET http://localhost:5000/api/product/
+
 
 ###
-POST http://localhost:5000/api/product
+PUT http://localhost:5000/api/product/67e2aa5d1bd877816c157ab7
 Content-Type: application/json
 
 {
-    "name": "Hoka One One",
+    "name": "Giày Sandal Nam Teva Original Universal - Đỏ",
     "description": "Giày chạy bộ thoải mái cho các quãng đường dài",
-    "price": 140,
+    "price": 1400000,
     "category": "67dd5478f11922ce575ccb17",
-    "sizes": [41, 42, 43],
+    "sizes": [41, 42, 43,44],
     "colors": ["Xanh", "Trắng"],
     "images": ["/images/hoka-one-one-1.jpg", "/images/hoka-one-one-2.jpg"],
     "brand": "Hoka",

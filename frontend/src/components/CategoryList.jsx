@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchCategories, selectCategories, selectCategoryStatus } from '../features/category/categorySlice';
-// Import các ảnh
+// Import các ảnh mẫu
 import shoe_1 from '../assets/images/shoe_1.webp';
 import shoe_2 from '../assets/images/shoe_2.webp';
 import shoe_3 from '../assets/images/shoe_3.webp';
@@ -17,7 +17,7 @@ const CategoryList = () => {
   // Danh sách ảnh mẫu để hiển thị cho danh mục
   const images = [shoe_1, shoe_2, shoe_3, shoe_4, shoe_5];
 
-  // Gọi API khi component được mount
+  // Gọi API lấy danh mục khi component được mount
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchCategories());
@@ -31,10 +31,9 @@ const CategoryList = () => {
         {categories.map((category, index) => (
           <NavLink
             key={category._id}
-            to={`/category/${category._id}`}
+            to={`/mystore?category=${category._id}`}
             className={({ isActive }) =>
-              `block p-4 bg-gray-100 rounded-lg transition duration-300 transform hover:scale-105 hover:bg-blue-100 ${
-                isActive ? 'bg-blue-600 text-white' : ''
+              `block p-4 bg-gray-100 rounded-lg transition duration-300 transform hover:scale-105 hover:bg-blue-100 ${isActive ? 'bg-blue-600 text-white' : ''
               }`
             }
           >
@@ -52,4 +51,5 @@ const CategoryList = () => {
     </div>
   );
 };
+
 export default CategoryList;

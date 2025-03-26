@@ -1,4 +1,3 @@
-// src/features/order/orderSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -10,7 +9,7 @@ const initialState = {
 
 // Thunk để đặt hàng
 export const placeOrder = createAsyncThunk('order/placeOrder', async (orderData) => {
-  const response = await fetch('/api/orders', {
+  const response = await fetch('/api/order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(orderData),

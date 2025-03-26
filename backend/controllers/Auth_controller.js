@@ -78,24 +78,30 @@ const AuthController = {
                 if (existingUser.email === email) return response(res, 400, "Email đã được đăng ký");
                 if (existingUser.username === username) return response(res, 400, "Tên người dùng đã được sử dụng");
             }
+            let role='customer';
 
-        
+            if (req.body.role)
+            {
+                role =req.body.role;
+            }
             // Create new user
             const newUser = new User({
                 username,
                 email,
-                password
+                password,
+                role
             });
 
             await newUser.save();
 
-            return response(res, 201, "Đăng ký thành công", { username, email });
+            return response(res, 201, "Đăng ký thành công", { username, email, role });
 
         } catch (error) {
             console.error('Register error:', error);
             return response(res, 500, "Lỗi server nội bộ");
         }
     },
+
 
     // Logout function
     logout: async (req, res) => {

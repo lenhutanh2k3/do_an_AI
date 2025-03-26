@@ -1,13 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
- import { api } from '../../utils/api';
+// src/features/auth/authSlice.js
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { api } from '../../utils/api';
 
 const initialState = {
     user: null,
     isAuthenticated: false,
     status: 'idle',
     error: null,
-    accessToken: null,
 };
+
+// Thêm loadUser thunk
+export const loadUser = createAsyncThunk('auth/loadUser', async (_, { rejectWithValue }) => {
+    try {
+        const response = await api.get('/auth/me');
+        return response.data.data.user;
+    } catch (error) {
+        return rejectWithValue(error.response?.data?.message || 'Không thể tải thông tin người dùng');
+    }
+});
 
 const authSlice = createSlice({
     name: 'auth',
@@ -20,8 +30,8 @@ const authSlice = createSlice({
         loginSuccess: (state, action) => {
             state.status = 'succeeded';
             state.user = action.payload.user;
-            state.accessToken = action.payload.token;
             state.isAuthenticated = true;
+            localStorage.setItem('accessToken', action.payload.token);
         },
         loginFailure: (state, action) => {
             state.status = 'failed';
@@ -40,24 +50,27 @@ const authSlice = createSlice({
         },
         logoutSuccess: (state) => {
             state.user = null;
-            state.accessToken = null;
             state.isAuthenticated = false;
             state.status = 'idle';
-            state.error = null;
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('cart');
         },
-        loadUserRequest: (state) => {
-            state.status = 'loading';
-        },
-        loadUserSuccess: (state, action) => {
-            state.status = 'succeeded';
-            state.user = action.payload.user;
-            state.isAuthenticated = true;
-        },
-        loadUserFailure: (state) => {
-            state.status = 'failed';
-            state.user = null;
-            state.isAuthenticated = false;
-        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadUser.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(loadUser.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.user = action.payload;
+                state.isAuthenticated = true;
+            })
+            .addCase(loadUser.rejected, (state) => {
+                state.status = 'failed';
+                state.user = null;
+                state.isAuthenticated = false;
+            });
     },
 });
 
@@ -69,10 +82,19 @@ export const {
     registerSuccess,
     registerFailure,
     logoutSuccess,
-    loadUserRequest,
-    loadUserSuccess,
-    loadUserFailure,
 } = authSlice.actions;
+
+// Thêm token vào header của mọi request
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
 
 export const login = (credentials) => async (dispatch) => {
     dispatch(loginRequest());
@@ -104,16 +126,6 @@ export const logout = () => async (dispatch) => {
         dispatch(logoutSuccess());
     } catch (error) {
         console.error('Logout failed:', error);
-    }
-};
-
-export const loadUser = () => async (dispatch) => {
-    dispatch(loadUserRequest());
-    try {
-        const response = await api.get('/auth/me');
-        dispatch(loadUserSuccess({ user: response.data.data.user }));
-    } catch (error) {
-        dispatch(loadUserFailure());
     }
 };
 

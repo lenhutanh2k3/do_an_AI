@@ -30,7 +30,7 @@ export const { fetchCategoriesStart, fetchCategoriesSuccess, fetchCategoriesFail
 
 // Thunk thủ công để gọi API và cập nhật state
 export const fetchCategories = () => async (dispatch) => {
-  dispatch(fetchCategoriesStart()); // Bắt đầu gọi API, set trạng thái là 'loading'
+  dispatch(fetchCategoriesStart()); 
 
   try {
     const response = await fetch('http://localhost:5000/api/category');

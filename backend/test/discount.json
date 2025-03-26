@@ -1,0 +1,161 @@
+[
+    {
+        "code": "SUMMER10",
+        "description": "Giảm giá 10% cho tất cả các loại giày trong mùa hè",
+        "discountType": "percentage",
+        "amount": 10,
+        "validFrom": "2025-06-01T00:00:00.000Z",
+        "validUntil": "2025-08-31T23:59:59.000Z",
+        "applicableProducts": [],
+        "applicableCategories": [
+            "64aefbcd9f3345c0a1bfcd34"
+        ],
+        "minimumPurchase": 500000,
+        "maximumDiscount": 100000,
+        "usageLimit": 100,
+        "usedCount": 0,
+        "isActive": true
+    },
+    {
+        "code": "NEWUSER50",
+        "description": "Giảm ngay 50.000đ cho người dùng mới",
+        "discountType": "fixed",
+        "amount": 50000,
+        "validFrom": "2025-01-01T00:00:00.000Z",
+        "validUntil": "2025-12-31T23:59:59.000Z",
+        "applicableProducts": [],
+        "applicableCategories": [],
+        "minimumPurchase": 200000,
+        "maximumDiscount": null,
+        "usageLimit": 1,
+        "usedCount": 0,
+        "isActive": true
+    },
+    {
+        "code": "BLACKFRIDAY30",
+        "description": "Giảm 30% cho toàn bộ sản phẩm vào ngày Black Friday",
+        "discountType": "percentage",
+        "amount": 30,
+        "validFrom": "2025-11-27T00:00:00.000Z",
+        "validUntil": "2025-11-30T23:59:59.000Z",
+        "applicableProducts": [],
+        "applicableCategories": [],
+        "minimumPurchase": 0,
+        "maximumDiscount": 300000,
+        "usageLimit": 500,
+        "usedCount": 0,
+        "isActive": true
+    },
+    {
+        "code": "BACKTOSCHOOL15",
+        "description": "Giảm giá 15% cho giày học sinh",
+        "discountType": "percentage",
+        "amount": 15,
+        "validFrom": "2025-08-01T00:00:00.000Z",
+        "validUntil": "2025-09-30T23:59:59.000Z",
+        "applicableProducts": [],
+        "applicableCategories": [
+            "64b0cdfe6f43d7b9e0afef89"
+        ],
+        "minimumPurchase": 300000,
+        "maximumDiscount": 50000,
+        "usageLimit": 300,
+        "usedCount": 0,
+        "isActive": true
+    },
+    {
+        "code": "VIPCUSTOMER20",
+        "description": "Giảm 20% cho khách hàng VIP",
+        "discountType": "percentage",
+        "amount": 20,
+        "validFrom": "2025-01-01T00:00:00.000Z",
+        "validUntil": "2025-12-31T23:59:59.000Z",
+        "applicableProducts": [],
+        "applicableCategories": [],
+        "minimumPurchase": 1000000,
+        "maximumDiscount": 150000,
+        "usageLimit": 50,
+        "usedCount": 0,
+        "isActive": true
+    },
+    {
+        "code": "FREESHIP",
+        "description": "Miễn phí vận chuyển cho đơn hàng từ 1 triệu đồng",
+        "discountType": "fixed",
+        "amount": 30000,
+        "validFrom": "2025-03-01T00:00:00.000Z",
+        "validUntil": "2025-12-31T23:59:59.000Z",
+        "applicableProducts": [],
+        "applicableCategories": [],
+        "minimumPurchase": 1000000,
+        "maximumDiscount": null,
+        "usageLimit": 1000,
+        "usedCount": 0,
+        "isActive": true
+    },
+    {
+        "code": "FLASHSALE50",
+        "description": "Giảm 50% cho giày thể thao trong đợt flash sale",
+        "discountType": "percentage",
+        "amount": 50,
+        "validFrom": "2025-04-01T00:00:00.000Z",
+        "validUntil": "2025-04-03T23:59:59.000Z",
+        "applicableProducts": [
+            "64aefbce6f47c4c2a2d0cd67",
+            "64aefbce6f47c4c2a2d0cd68"
+        ],
+        "applicableCategories": [],
+        "minimumPurchase": 500000,
+        "maximumDiscount": 200000,
+        "usageLimit": 200,
+        "usedCount": 0,
+        "isActive": true
+    },
+    {
+        "code": "FATHERSDAY25",
+        "description": "Giảm giá 25% nhân ngày của Cha",
+        "discountType": "percentage",
+        "amount": 25,
+        "validFrom": "2025-06-15T00:00:00.000Z",
+        "validUntil": "2025-06-16T23:59:59.000Z",
+        "applicableProducts": [],
+        "applicableCategories": [],
+        "minimumPurchase": 0,
+        "maximumDiscount": 100000,
+        "usageLimit": 100,
+        "usedCount": 0,
+        "isActive": true
+    },
+    {
+        "code": "WOMENSDAY10",
+        "description": "Giảm 10% cho toàn bộ sản phẩm vào ngày Quốc tế Phụ nữ",
+        "discountType": "percentage",
+        "amount": 10,
+        "validFrom": "2025-03-08T00:00:00.000Z",
+        "validUntil": "2025-03-08T23:59:59.000Z",
+        "applicableProducts": [],
+        "applicableCategories": [],
+        "minimumPurchase": 0,
+        "maximumDiscount": null,
+        "usageLimit": 500,
+        "usedCount": 0,
+        "isActive": true
+    },
+    {
+        "code": "CLEARANCE30",
+        "description": "Giảm giá 30% cho các sản phẩm tồn kho",
+        "discountType": "percentage",
+        "amount": 30,
+        "validFrom": "2025-12-01T00:00:00.000Z",
+        "validUntil": "2025-12-31T23:59:59.000Z",
+        "applicableProducts": [],
+        "applicableCategories": [
+            "64aefbdc7f48d4c4b1c7de5a"
+        ],
+        "minimumPurchase": 0,
+        "maximumDiscount": 150000,
+        "usageLimit": 100,
+        "usedCount": 0,
+        "isActive": true
+    }
+]

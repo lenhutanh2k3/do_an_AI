@@ -14,6 +14,7 @@ export const verifyToken = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         req.user = decoded;
+        console.log('Decoded token:', decoded);
         next();
     } catch (error) {
         return res.status(403).json({ message: 'Token không hợp lệ' });
@@ -56,6 +57,7 @@ export const verifyUpdateUser = (req, res, next) => {
 // Middleware: Xác thực customer hoặc admin
 export const verifyCustomerOrAdmin = (req, res, next) => {
     verifyToken(req, res, () => {
+        console.log("req.user in verifyCustomerOrAdmin:", req.user);
         if (req.user.role === 'admin' || req.user.role === 'customer') {
             next();
         } else {

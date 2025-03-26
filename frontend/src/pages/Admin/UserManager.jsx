@@ -10,8 +10,9 @@ const UsersManagement = () => {
     // Thay bằng API thực tế của bạn
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/users'); // API mẫu
-        setUsers(response.data);
+        const response = await axios.get('http://localhost:5000/api/user/'); 
+        console.log(response.data.data.users);
+        setUsers(response.data.data.users);
       } catch (error) {
         console.error('Lỗi khi lấy dữ liệu:', error);
       }
@@ -29,6 +30,7 @@ const UsersManagement = () => {
         <table className="min-w-full bg-white shadow-md rounded-lg">
           <thead className="bg-gray-200">
             <tr>
+              <th className="py-3 px-4 text-left text-gray-600 font-semibold">STT</th>
               <th className="py-3 px-4 text-left text-gray-600 font-semibold">ID</th>
               <th className="py-3 px-4 text-left text-gray-600 font-semibold">Tên</th>
               <th className="py-3 px-4 text-left text-gray-600 font-semibold">Email</th>
@@ -36,10 +38,11 @@ const UsersManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {users.map((user,index) => (
               <tr key={user.id} className="border-b hover:bg-gray-50">
-                <td className="py-3 px-4">{user.id}</td>
-                <td className="py-3 px-4">{user.name}</td>
+                <td className="py-3 px-4">{index+1}</td>
+                <td className="py-3 px-4">{user._id}</td>
+                <td className="py-3 px-4">{user.username}</td>
                 <td className="py-3 px-4">{user.email}</td>
                 <td className="py-3 px-4 flex space-x-2">
                   <button className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">

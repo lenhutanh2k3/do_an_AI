@@ -16,7 +16,14 @@ import LoginAdmin from './pages/Admin/LoginAdmin';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './features/auth/authSlice';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import DashboardOverview from './components/DashboardOverview';
+import ProductManagement from './pages/Admin/ProductManager';
+import FormProduct from './pages/Admin/FormProduct';
+import OrderManagement from './pages/Admin/OrderManager';
+import FormOrder from './pages/Admin/FormOrder';
+import OrderDetailPage from './pages/Admin/OrderDetail';
 function App() {
   const dispatch = useDispatch();
 
@@ -26,6 +33,7 @@ function App() {
 
   return (
     <Router>
+      <ToastContainer />
       <div className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow">
@@ -47,8 +55,17 @@ function App() {
                 </ProtectedRoute>
               }
             >
+              <Route path="dashboard" element={<DashboardOverview />} />
               <Route path="users" element={<UsersManagement />} />
+              <Route path="products" element={<ProductManagement />}>
+              </Route>
               <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="form-product/:id" element={<FormProduct />} />
+              <Route path="form-product" element={<FormProduct />} />
+              <Route path="orders" element={<OrderManagement />} />
+              <Route path="form-order/:id" element={<FormOrder />} />
+              <Route path="form-order" element={<FormOrder />} />
+              <Route path="order-detail/:id" element={<OrderDetailPage />} />
             </Route>
           </Routes>
         </main>

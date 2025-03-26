@@ -7,5 +7,5 @@ RouterUser.get('/',  UserController.getAllUsers);
 RouterUser.post('/',  UserController.createUser);
 RouterUser.put('/:id', UserController.updateUser);
 RouterUser.delete('/:id', UserController.deleteUser);
-
+RouterUser.get('/count',UserController.countUser)
 export default RouterUser;

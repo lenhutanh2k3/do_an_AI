@@ -55,6 +55,26 @@ const CategoryController = {
             console.log(error);
             response(res, 500, "Lỗi máy chủ nội bộ");
         }
+    },
+    countCategory: async (req, res) => {
+        try {
+            
+            const categoryCount = await Category.countDocuments();
+            console.log(categoryCount);
+            // Trả về kết quả
+            res.status(200).json({
+                success: true,
+                count: categoryCount,
+                message: 'Số lượng category được tính thành công!'
+            });
+        } catch (error) {
+            // Xử lý lỗi
+            console.error(error);
+            res.status(500).json({
+                success: false,
+                message: 'Có lỗi xảy ra khi tính số lượng category'
+            });
+        }
     }
 };
 

@@ -13,7 +13,7 @@ import banner_3 from '../assets/images/banner_3.webp';
 const Home = () => {
   const dispatch = useDispatch();
   const featuredProducts = useSelector(selectFeaturedProducts);
-  const activeDiscount = useSelector((state) => state.discount?.active); // Thêm kiểm tra state.discount
+  const activeDiscount = useSelector((state) => state.discount?.active);
   const [bannerImages] = useState([
     'https://images.unsplash.com/photo-1483985988355-763728e1935b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80',
     banner_2,
@@ -34,6 +34,11 @@ const Home = () => {
     autoplaySpeed: 2000,
     pauseOnHover: true,
   };
+
+  // Lọc ra các sản phẩm có discount khác null
+  const discountedProducts = featuredProducts.filter(
+    (product) => product.discount !== null && product.discount !== undefined
+  );
 
   return (
     <div className="container mx-auto">
@@ -63,13 +68,13 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Sản phẩm nổi bật */}
+      {/* Sản phẩm nổi bật (có discount) */}
       <section className="py-8">
         <div className="container mx-auto">
           <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Sản phẩm nổi bật</h2>
-          {featuredProducts && featuredProducts.length > 0 ? (
+          {discountedProducts && discountedProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {featuredProducts.map((product) => (
+              {discountedProducts.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
