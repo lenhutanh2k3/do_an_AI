@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-const serverDomain = 'http://localhost:5000'; // Đảm bảo serverDomain trỏ đúng đến server backend
 
 const ProductManagement = () => {
     const [products, setProducts] = useState([]);
@@ -13,7 +12,7 @@ const ProductManagement = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(`${serverDomain}/api/product/`);
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/`);
                 console.log(response.data.data.products);
                 setProducts(response.data.data.products);
             } catch (error) {
@@ -26,7 +25,7 @@ const ProductManagement = () => {
     // Hàm xử lý xóa sản phẩm
     const handleDelete = async (productId) => {
         try {
-            await axios.delete(`${serverDomain}/api/product/${productId}`);
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/product/${productId}`);
             // Cập nhật lại danh sách sản phẩm sau khi xóa
             setProducts(products.filter(product => product._id !== productId));
         } catch (error) {
@@ -63,8 +62,8 @@ const ProductManagement = () => {
                     <tbody>
                         {products.map((product, index) => {
                             const imageUrl = product.images && product.images[0]
-                                ? `${serverDomain}${product.images[0]}`
-                                : `${serverDomain}/uploads/default-image.jpg`;
+                                ? `${import.meta.env.VITE_BACKEND_URL}${product.images[0]}`
+                                : `${import.meta.env.VITE_BACKEND_URL}/uploads/default-image.jpg`;
 
                             return (
                                 <tr key={product._id} className="border-b hover:bg-gray-50">

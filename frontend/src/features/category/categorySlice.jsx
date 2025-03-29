@@ -33,7 +33,7 @@ export const fetchCategories = () => async (dispatch) => {
   dispatch(fetchCategoriesStart()); 
 
   try {
-    const response = await fetch('http://localhost:5000/api/category');
+    const response = await fetch('/api/category');
     if (!response.ok) {
       throw new Error('Không thể lấy danh sách danh mục');
     }

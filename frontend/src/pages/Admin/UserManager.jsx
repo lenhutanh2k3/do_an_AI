@@ -10,7 +10,7 @@ const UsersManagement = () => {
     // Thay bằng API thực tế của bạn
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/user/'); 
+        const response = await axios.get('/api/user/'); 
         console.log(response.data.data.users);
         setUsers(response.data.data.users);
       } catch (error) {

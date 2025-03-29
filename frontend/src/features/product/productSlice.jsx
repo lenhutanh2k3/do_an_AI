@@ -3,16 +3,18 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   products: [],
   currentProduct: null,
-  featured: [],          // Thêm featuredProducts để hiển thị ở trang Home
+  featured: [],         
   status: 'idle',
   error: null,
 };
+
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
 // Action creators cho việc fetch sản phẩm
 export const fetchProducts = () => async (dispatch) => {
   dispatch(fetchProductsPending());
   try {
-    const response = await fetch('http://localhost:5000/api/product/');
+    const response = await fetch(`${apiUrl}/api/product/`);
     if (!response.ok) {
       throw new Error('Không thể lấy danh sách sản phẩm');
     }
@@ -30,7 +32,7 @@ export const fetchProducts = () => async (dispatch) => {
 export const fetchProductById = (id) => async (dispatch) => {
   dispatch(fetchProductByIdPending());
   try {
-    const response = await fetch(`http://localhost:5000/api/product/${id}`);
+    const response = await fetch(`${apiUrl}/api/product/${id}`);
     if (!response.ok) {
       throw new Error('Không thể lấy thông tin sản phẩm');
     }
@@ -90,4 +92,4 @@ export default productSlice.reducer;
 // Selectors để truy cập state
 export const selectProducts = (state) => state.products.products;
 export const selectCurrentProduct = (state) => state.products.currentProduct;
-export const selectFeaturedProducts = (state) => state.products.featured; // Thêm selector cho sản phẩm nổi bật
+export const selectFeaturedProducts = (state) => state.products.featured;

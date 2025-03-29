@@ -107,7 +107,9 @@ const Home = () => {
             </button>
           </div>
         </div>
+        
       </section>
+      
     </div>
   );
 };

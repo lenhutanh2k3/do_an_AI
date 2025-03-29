@@ -26,15 +26,15 @@ const ProductForm = ({ productId, onSuccess }) => {
         const fetchInitialData = async () => {
             try {
                 const [categoriesRes, discountsRes] = await Promise.all([
-                    axios.get('http://localhost:5000/api/category'),
-                    axios.get('http://localhost:5000/api/discount')
+                    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/category`),
+                    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/discount`)
                 ]);
 
                 setCategories(categoriesRes.data.data);
                 setDiscounts(discountsRes.data.data);
 
                 if (isEditMode) {
-                    const productRes = await axios.get(`http://localhost:5000/api/product/${productId}`);
+                    const productRes = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/${productId}`);
                     const product = productRes.data.data;
                     console.log(product);
                     setProductData({
@@ -124,8 +124,8 @@ const ProductForm = ({ productId, onSuccess }) => {
                 console.log(`${key}: ${value}`);
             }
             const url = isEditMode
-                ? `http://localhost:5000/api/product/${productId}`
-                : 'http://localhost:5000/api/product';
+                ? `${import.meta.env.VITE_BACKEND_URL}/api/product/${productId}`
+                : `${import.meta.env.VITE_BACKEND_URL}/api/product`;
 
             console.log(url);
             const response = isEditMode
@@ -330,7 +330,7 @@ const ProductForm = ({ productId, onSuccess }) => {
                             {productData.images.map((img, index) => (
                                 <img
                                     key={index}
-                                    src={`http://localhost:5000${img}`} // Đường dẫn ảnh từ server
+                                    src={`${img}`} // Đường dẫn ảnh từ server
                                     alt={`Preview ${index + 1}`}
                                     className="h-32 object-cover rounded"
                                 />

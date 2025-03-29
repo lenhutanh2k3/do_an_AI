@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
-  const serverDomain = 'http://localhost:5000'; 
 
   const handleAddToCart = () => {
     dispatch(addToCartLocal({ product, quantity: 1 }));
@@ -19,9 +18,9 @@ const ProductCard = ({ product }) => {
     : product.price;
 
   // Lấy đường dẫn ảnh đầu tiên hoặc ảnh mặc định
-  const imageUrl = product.images && product.images[0]
-    ? `${serverDomain}${product.images[0]}`
-    : `${serverDomain}/uploads/default-image.jpg`; // Đảm bảo có ảnh mặc định trong thư mục uploads
+  const imageUrl = product.images && product.images.length > 0 && product.images[0]
+    ? `${import.meta.env.VITE_BACKEND_URL}${product.images[0]}`
+    : '/uploads/default-image.jpg';
 
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-md transition transform hover:scale-102 hover:shadow-xl duration-300 ease-in-out">

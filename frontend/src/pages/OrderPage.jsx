@@ -8,7 +8,7 @@ const OrderPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const serverDomain = 'http://localhost:5000';
+
   const [orderData, setOrderData] = useState({
     shippingAddress: {
       fullName: '',
@@ -81,7 +81,7 @@ const OrderPage = () => {
       };
 
       // Gọi API đặt hàng
-      const response = await axios.post('http://localhost:5000/api/order', orderPayload, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/order`, orderPayload, {
         withCredentials: true
       });
 
@@ -241,8 +241,8 @@ const OrderPage = () => {
             <div className="space-y-4">
               {cartItems.map((item) => {
                 const imageUrl = item.product.images && item.product.images[0]
-                  ? `${serverDomain}${item.product.images[0]}`
-                  : `${serverDomain}/uploads/default-image.jpg`;
+                  ? `${import.meta.env.VITE_BACKEND_URL}${item.product.images[0]}`
+                  : `${import.meta.env.VITE_BACKEND_URL}/uploads/default-image.jpg`;
 
                 return (
                   <div key={`${item.product._id}-${item.selectedSize}-${item.selectedColor}`}
@@ -254,7 +254,7 @@ const OrderPage = () => {
                         className="w-16 h-16 object-cover rounded"
                         onError={(e) => {
                           e.target.onerror = null;
-                          e.target.src = `${serverDomain}/uploads/default-image.jpg`;
+                          e.target.src = `${import.meta.env.VITE_BACKEND_URL}/uploads/default-image.jpg`;
                         }}
                       />
                       <div>

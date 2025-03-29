@@ -18,10 +18,7 @@ const Footer = () => {
           <h3 className="text-xl font-bold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <NavLink
-                to="/products"
-                className="hover:text-yellow-400 transition"
-              >
+              <NavLink to="/products" className="hover:text-yellow-400 transition">
                 Products
               </NavLink>
             </li>
@@ -31,10 +28,7 @@ const Footer = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/order-history"
-                className="hover:text-yellow-400 transition"
-              >
+              <NavLink to="/order-history" className="hover:text-yellow-400 transition">
                 Order History
               </NavLink>
             </li>

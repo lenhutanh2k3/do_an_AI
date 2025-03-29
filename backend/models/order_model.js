@@ -8,6 +8,8 @@ const OrderSchema = new mongoose.Schema({
                 product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
                 quantity: { type: Number, required: true, min: 1 },
                 price: { type: Number, required: true, min: 0 },
+                size: { type: String, required: true }, // Thêm size
+                color: { type: String, required: true } // Thêm color
             },
         ],
         validate: [arrayLimit, 'Đơn hàng phải có ít nhất một sản phẩm'],
@@ -21,7 +23,7 @@ const OrderSchema = new mongoose.Schema({
     shippingAddress: { type: String, required: true },
     paymentMethod: {
         type: String,
-        enum: ['COD','MOMO', 'BANK'],
+        enum: ['COD', 'MOMO', 'BANK'],
         required: true
     },
     discount: { type: mongoose.Schema.Types.ObjectId, ref: 'Discount' },

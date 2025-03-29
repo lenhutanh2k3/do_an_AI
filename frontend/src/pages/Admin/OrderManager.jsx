@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-const serverDomain = 'http://localhost:5000';
 
 const OrderManagement = () => {
     const [orders, setOrders] = useState([]);
@@ -12,7 +11,7 @@ const OrderManagement = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get(`${serverDomain}/api/order/`, {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/order/`, {
                     withCredentials: true
                 });
                 setOrders(response.data.data.orders);
@@ -26,7 +25,7 @@ const OrderManagement = () => {
     const handleDelete = async (orderId) => {
         if (window.confirm('Bạn có chắc chắn muốn xóa đơn hàng này?')) {
             try {
-                await axios.delete(`${serverDomain}/api/order/${orderId}`, {
+                await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/order/${orderId}`, {
                     withCredentials: true
                 });
                 setOrders(orders.filter(order => order._id !== orderId));

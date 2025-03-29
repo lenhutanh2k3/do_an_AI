@@ -15,7 +15,7 @@ const OrderForm = ({ orderId, onSuccess }) => {
         if (isEditMode) {
             const fetchOrder = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:5000/api/order/${orderId}`, {
+                    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/order/${orderId}`, {
                         withCredentials: true
                     });
                     const order = response.data.data;
@@ -46,8 +46,8 @@ const OrderForm = ({ orderId, onSuccess }) => {
 
         try {
             const url = isEditMode
-                ? `http://localhost:5000/api/order/${orderId}`
-                : 'http://localhost:5000/api/order'; // API tạo mới
+                ? `${import.meta.env.VITE_BACKEND_URL}/api/order/${orderId}`
+                : `${import.meta.env.VITE_BACKEND_URL}/api/order`;
 
             const response = isEditMode
                 ? await axios.put(url, { status: orderData.status }, {

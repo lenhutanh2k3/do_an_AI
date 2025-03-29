@@ -10,6 +10,7 @@ const ProductDetailPage = () => {
   );
   const dispatch = useDispatch();
   const serverDomain = 'http://localhost:5000';
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -44,8 +45,8 @@ const ProductDetailPage = () => {
     }
   };
   const imageUrl = product.images && product.images[0]
-    ? `${serverDomain}${product.images[0]}`
-    : `${serverDomain}/uploads/default-image.jpg`;
+    ? `${apiUrl}${product.images[0]}`
+    : `${apiUrl}/uploads/default-image.jpg`;
 
   return (
     <div className="container mx-auto py-10 px-4">

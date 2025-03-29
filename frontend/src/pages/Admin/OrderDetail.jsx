@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const serverDomain = 'http://localhost:5000';
+
 
 const OrderDetailPage = () => {
     const { id } = useParams(); // Lấy ID đơn hàng từ URL
@@ -16,7 +16,7 @@ const OrderDetailPage = () => {
     useEffect(() => {
         const fetchOrder = async () => {
             try {
-                const response = await axios.get(`${serverDomain}/api/order/${id}`, {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/order/${id}`, {
                     withCredentials: true // Gửi cookie để xác thực
                 });
                 setOrder(response.data.data);
@@ -83,7 +83,7 @@ const OrderDetailPage = () => {
                                 <td className="py-2 px-4">
                                     {item.product?.images?.[0] ? (
                                         <img
-                                            src={`${serverDomain}${item.product.images[0]}`}
+                                            src={`${import.meta.env.VITE_BACKEND_URL}${item.product.images[0]}`}
                                             alt={item.product.name}
                                             className="h-16 w-16 object-cover rounded"
                                         />

@@ -72,8 +72,8 @@ const CartPage = () => {
                       <img
                         src={
                           item.product.images && item.product.images[0]
-                            ? item.product.images[0]
-                            : 'default-image.jpg'
+                            ? `${import.meta.env.VITE_BACKEND_URL}${item.product.images[0]}`
+                            : '/uploads/default-image.jpg'
                         }
                         alt={item.product.name}
                         className="w-24 h-24 object-cover rounded-md"

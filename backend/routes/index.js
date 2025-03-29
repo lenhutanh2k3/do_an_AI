@@ -4,8 +4,8 @@ import RouterCategory from './category_route.js';
 import RouterUser from './user_route.js';
 import RouterAuth from './auth_route.js';
 import RouterDiscount from './discount_route.js';
-// import RouterCart from './cart_route.js';
 import RouterOrder from './order_route.js';
+import RouterChatbot from './chatbot_route.js';
 const route =(app)=>
 {
     app.use('/api/product',RouterProduct);
@@ -14,6 +14,7 @@ const route =(app)=>
     app.use('/api/auth',RouterAuth);
     app.use('/api/discount',RouterDiscount);
     app.use('/api/order',RouterOrder);
+    app.use('/api/chatbot',RouterChatbot);
 
 }
 export default route;

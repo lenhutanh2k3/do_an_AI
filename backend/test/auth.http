@@ -16,3 +16,34 @@ Content-Type: application/json
     "email":"quetran123@gmail.com",
     "password":"quetran123"
 }
+
+###
+POST https://c3d7-42-118-70-150.ngrok-free.app/api/chatbot/chat
+Content-Type: application/json
+
+{
+  "responseId": "cf943acd-9872-4bf6-ad02-b9de2fcb0633-7c6de2ad",
+  "queryResult": {
+    "queryText": "Tôi muốn mua giày thể thao",
+    "parameters": {
+      "category": "Sneaker"
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/chatbotbangiay-pnpu/locations/global/agent/intents/162b86d0-09dc-44d8-9c26-b66ea443bf85",
+      "displayName": "product_by_category"
+    },
+    "intentDetectionConfidence": 0.5571922,
+    "languageCode": "vi"
+  },
+  "agentId": "298b66ab-e96a-4bb1-b43f-0909219017f1"
+}

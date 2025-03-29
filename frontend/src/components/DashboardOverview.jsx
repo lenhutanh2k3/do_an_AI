@@ -7,15 +7,15 @@ const DashboardOverview = () => {
         const fetchStats = async () => {
             try {
                 // Fetch user count
-                const usersResponse = await fetch('http://localhost:5000/api/user/count');
+                const usersResponse = await fetch('/api/user/count');
                 const usersData = await usersResponse.json();
 
                 // Fetch category count
-                const categoriesResponse = await fetch('http://localhost:5000/api/category/count');
+                const categoriesResponse = await fetch('/api/category/count');
                 const categoriesData = await categoriesResponse.json();
 
                 // Fetch product count
-                const productsResponse = await fetch('http://localhost:5000/api/product/count');
+                const productsResponse = await fetch('/api/product/count');
                 const productsData = await productsResponse.json();
 
                 // Set the stats after receiving all responses
